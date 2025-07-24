@@ -1,0 +1,6 @@
+---
+all:
+  children:
+    samba_servers:
+      hosts:
+        vm_samba_users:

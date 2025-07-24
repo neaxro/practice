@@ -1,0 +1,24 @@
+---
+- name: "Ensure user {{ user.name }} ({{ user.comment }}) is configured"
+  ansible.builtin.user:
+    uid: "{{ user.uid }}"
+    name: "{{ user.name }}"
+    comment: "{{ user.comment }}"
+    create_home: "{{ user.create_home }}"
+    shell: "{{ user.shell | default('/sbin/nologin') }}"
+    generate_ssh_key: "{{ user.generate_ssh_key | default(false) }}"
+    ssh_key_bits: 2048
+    password: >-
+      {{ '!' if (lock_all_users or (user.locked | default(false)))
+         else (user.password | password_hash('sha512')) }}
+    state: present
+
+- name: "Set up Authorized keys for user"
+  ansible.posix.authorized_key:
+    user: "{{ user.name }}"
+    key: "{{ public_key.key }}"
+    state: "{{ 'present' if public_key.enabled else 'absent' }}"
+  loop: "{{ user.authorized_keys }}"
+  loop_control:
+    loop_var: public_key
+  when: user.authorized_keys is defined

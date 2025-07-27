@@ -1,4 +1,16 @@
 ---
+- name: "Get group names where {{ user.name }} is a member"
+  ansible.builtin.set_fact:
+    user_groups: >-
+      {{ posix_groups | selectattr('users', 'defined')
+                      | selectattr('users', 'contains', user.name)
+                      | map(attribute='name')
+                      | list }}
+
+- name: "Info: {{ user.name }} groups"
+  ansible.builtin.debug:
+    msg: "{{ user_groups }}"
+
 - name: "Ensure user {{ user.name }} ({{ user.comment }}) is configured"
   ansible.builtin.user:
     uid: "{{ user.uid }}"
@@ -6,6 +18,9 @@
     comment: "{{ user.comment }}"
     create_home: "{{ user.create_home }}"
     shell: "{{ user.shell | default('/sbin/nologin') }}"
+    groups: >-
+      {{ '' if (lock_all_users or (user.locked | default(false)))
+         else user_groups }}
     generate_ssh_key: "{{ user.generate_ssh_key | default(false) }}"
     ssh_key_bits: 2048
     password: >-

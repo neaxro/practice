@@ -1,4 +1,13 @@
 ---
+- name: "Creating group {{ group.name }}"
+  ansible.builtin.group:
+    name: "{{ group.name }}"
+    gid: "{{ group.gid }}"
+    state: present
+  loop: "{{ posix_groups }}"
+  loop_control:
+    loop_var: group
+
 - name: "Creating user {{ user.name }} ({{ user.comment }})"
   ansible.builtin.include_tasks: create_user.yaml
   loop: "{{ posix_users }}"

@@ -1,0 +1,37 @@
+---
+- name: "Creating group {{ group.name }}"
+  ansible.builtin.group:
+    name: "{{ group.name }}"
+    gid: "{{ group.gid }}"
+    state: present
+  loop: "{{ posix_groups }}"
+  loop_control:
+    loop_var: group
+
+- name: "Creating user {{ user.name }} ({{ user.comment }})"
+  ansible.builtin.include_tasks: create_user.yaml
+  loop: "{{ posix_users }}"
+  loop_control:
+    loop_var: user
+
+- name: Ensure directories exist
+  ansible.builtin.file:
+    path: "{{ item.path }}"
+    owner: "{{ item.owner | default('root')  }}"
+    group: "{{ item.group | default('root')  }}"
+    mode: "{{ item.mode | default('0755') }}"
+    state: "{{ item.directory | default('directory') }}"
+  loop: "{{ posix_folders }}"
+
+- name: Remove all ACLs from paths
+  ansible.builtin.command: "setfacl -b {{ item.path }}"
+  loop: "{{ posix_folders }}"
+
+- name: Set ACLs
+  ansible.posix.acl:
+    path: "{{ item.0.path }}"
+    etype: "{{ item.1.etype }}"
+    entity: "{{ item.1.entity }}"
+    permissions: "{{ item.1.perms }}"
+    state: present
+  loop: "{{ posix_folders | subelements('acls') }}"

@@ -1,2 +1,171 @@
 ---
 ansible_ssh_pass: Asdasd11
+
+# Users:          2000-3000
+# Service Users:  5000-6000
+# Groups:         10000-11000
+
+lock_all_users: false
+
+posix_folders:
+  - path: /storage
+    owner: root
+    group: root
+    mode: 770
+    acls:
+      - { etype: group, entity: storage_ro, perms: rx }
+      - { etype: group, entity: storage_rw, perms: rwx }
+
+  - path: /storage/common
+    owner: root
+    group: root
+    mode: 770
+    acls:
+      - { etype: group, entity: common_ro, perms: rx }
+      - { etype: group, entity: common_rw, perms: rwx }
+
+  - path: /storage/common/films
+    owner: root
+    group: root
+    mode: 770
+    acls:
+      - { etype: group, entity: films_ro, perms: rx }
+      - { etype: group, entity: films_rw, perms: rwx }
+
+  - path: /storage/common/isos
+    owner: root
+    group: root
+    mode: 770
+    acls:
+      - { etype: group, entity: isos_ro, perms: rx }
+      - { etype: group, entity: isos_rw, perms: rwx }
+
+  - path: /storage/common/s3
+    owner: root
+    group: root
+    mode: 770
+    acls:
+      - { etype: group, entity: s3_ro, perms: rx }
+      - { etype: group, entity: s3_rw, perms: rwx }
+
+  - path: /storage/common/workspace
+    owner: root
+    group: root
+    mode: 770
+    acls:
+      - { etype: group, entity: workspace_ro, perms: rx }
+      - { etype: group, entity: workspace_rw, perms: rwx }
+
+  - path: /storage/safe
+    owner: root
+    group: root
+    mode: 770
+    acls:
+      - { etype: group, entity: safe_ro, perms: rx }
+      - { etype: group, entity: safe_rw, perms: rwx }
+
+posix_users:
+  - uid: 2001
+    name: alice
+    comment: Alice Anderson
+    create_home: true
+    password: "Asdasd22"
+    shell: /bin/bash
+    generate_ssh_key: true
+    authorized_keys:
+      # axel@ubuntu
+      - key: ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQCkoawvCBBV/eRY17Zkv440xtWKbcjwT+yrZr3kVWa/Z6dtPd58S/WZ5FZ5sWVkzr78P7hZJiHxU4ISmNEANcJFOMz5X1LF+gSfk0Qkba431Qq0I6ODODNCcCo90no/P0ml0kyhcqNPkfH8WIlcYpQ3w0PV9q0bM3xDDP/HVXlYzSzz0xLOS/Vqjqa2AbUXQdIdtPszuSaw+DFbaTg2wVQIAegzF3tzlj/qEE8gsMd7dQ2S/FZXp1Nr1lGFI3ZeGhy66F75o7ysa46ua7sHZJYCpdDs9wX2coQRams95aSTwnIlSbjZE72oo2SMrNV4JKsPe23/db6Yi6LEb3p7zF9bDV/HPjhZeiGdEd66najWsLAuIgoYabTdmI/4q6NZMflnvcIQeD646Q5Bof4Y02ldixqZ8iodzHd+4FRWbztb/wQZvTiqPvcSDpwUmrBklmgnNao0s+tZShZfask+Y3R2M192cwkMKIImQysbBZvuKI/NgO5oiqqgS6cvZLdQchE= axel@ubuntu
+        enabled: false
+      # peter@osboxes
+      - key: ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCs8+5dNkrbOX7Pg3OrJ7Vnxc4JtzAoeuNgGOM03jmHxWXZP2cHPmCI0gsDTaBU4jN+wn58g/Cgy/hFYK8MA9NIFgp9NRqetfJaRnK1eN15X+/1j1jst9Uc5imFpKmWsi1Sidg/nE0WjxhQrU+8XZ4EBXxxlK6CBIoKot5KJtUZFtjuq8i6tA9Eb4hDb3nRtmIrQmPLkh7wLuiT20dvOZ2LoW0pRzrsRrz7Q6//amg0jBZji7uva23ZFP/VvADKJUEgQO8naFSc7kkShuUKvY60inyR1trp6fORNqCeqNlEZDjJq9KC7wWXYln1ZJTyLo2brDkWNuWXk4T8fPYxEczj ansible-generated on osboxes
+        enabled: true
+    locked: false
+    samba_access: true
+
+  - uid: 2002
+    name: peter
+    comment: Peter Griffin
+    create_home: true
+    password: "Asdasd22"
+    shell: /bin/bash
+    generate_ssh_key: true
+    authorized_keys:
+      - key: ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQCkoawvCBBV/eRY17Zkv440xtWKbcjwT+yrZr3kVWa/Z6dtPd58S/WZ5FZ5sWVkzr78P7hZJiHxU4ISmNEANcJFOMz5X1LF+gSfk0Qkba431Qq0I6ODODNCcCo90no/P0ml0kyhcqNPkfH8WIlcYpQ3w0PV9q0bM3xDDP/HVXlYzSzz0xLOS/Vqjqa2AbUXQdIdtPszuSaw+DFbaTg2wVQIAegzF3tzlj/qEE8gsMd7dQ2S/FZXp1Nr1lGFI3ZeGhy66F75o7ysa46ua7sHZJYCpdDs9wX2coQRams95aSTwnIlSbjZE72oo2SMrNV4JKsPe23/db6Yi6LEb3p7zF9bDV/HPjhZeiGdEd66najWsLAuIgoYabTdmI/4q6NZMflnvcIQeD646Q5Bof4Y02ldixqZ8iodzHd+4FRWbztb/wQZvTiqPvcSDpwUmrBklmgnNao0s+tZShZfask+Y3R2M192cwkMKIImQysbBZvuKI/NgO5oiqqgS6cvZLdQchE= axel@ubuntu
+        enabled: false
+    locked: false
+
+  - uid: 5000
+    name: su-jellyfin
+    comment: Service User - Jellyfin
+    create_home: false
+    password: "Asdasd22"
+    shell: /bin/bash
+    locked: false
+
+posix_groups:
+  - name: films_ro
+    gid: 10000
+    users: []
+  - name: films_rw
+    gid: 10001
+    users: []
+
+  - name: s3_ro
+    gid: 10002
+    users: []
+  - name: s3_rw
+    gid: 10003
+    users: []
+
+  - name: isos_ro
+    gid: 10004
+    users: []
+  - name: isos_rw
+    gid: 10005
+    users: []
+
+  - name: workspace_ro
+    gid: 10006
+    users: []
+  - name: workspace_rw
+    gid: 10007
+    users:
+      - alice
+
+  - name: media_ro
+    gid: 10008
+    users: []
+  - name: media_rw
+    gid: 10009
+    users: []
+
+  - name: backups_ro
+    gid: 10010
+    users: []
+  - name: backups_rw
+    gid: 10011
+    users: []
+
+  - name: storage_ro
+    gid: 10012
+    users:
+      - alice
+  - name: storage_rw
+    gid: 10013
+    users: []
+
+  - name: common_ro
+    gid: 10014
+    users:
+      - alice
+  - name: common_rw
+    gid: 10015
+    users: []
+
+  - name: safe_ro
+    gid: 10016
+    users:
+      - alice
+  - name: safe_rw
+    gid: 10017
+    users: []

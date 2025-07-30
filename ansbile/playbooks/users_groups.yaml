@@ -1,7 +1,0 @@
----
-- name: "Create POSIX Users and Groups"
-  hosts: all
-  become: true
-  gather_facts: false
-  roles:
-    - users_groups

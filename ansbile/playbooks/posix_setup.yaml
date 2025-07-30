@@ -1,0 +1,7 @@
+---
+- name: "Set up POSIX users, groups, folders, files and its permissions"
+  hosts: all
+  become: true
+  gather_facts: false
+  roles:
+    - posix

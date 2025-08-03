@@ -1,70 +1,21 @@
 ---
 ansible_ssh_pass: Asdasd11
 
-# Users:          2000-3000
-# Service Users:  5000-6000
-# Groups:         10000-11000
+# Common Users:             2000-3000
+# Host specific Users:      3001-4000
+# Service Users:            5000-6000
+# Common Groups:            10000-11000
+# Host specific Groups:     11001-12000
 
 lock_all_users: false
-
-posix_folders:
-  - path: /storage
+common_posix_folders:
+  - path: /common_storage
     owner: root
     group: root
-    mode: 770
-    acls:
-      - { etype: group, entity: storage_ro, perms: rx }
-      - { etype: group, entity: storage_rw, perms: rwx }
+    mode: 775
+    acls: []
 
-  - path: /storage/common
-    owner: root
-    group: root
-    mode: 770
-    acls:
-      - { etype: group, entity: common_ro, perms: rx }
-      - { etype: group, entity: common_rw, perms: rwx }
-
-  - path: /storage/common/films
-    owner: root
-    group: root
-    mode: 770
-    acls:
-      - { etype: group, entity: films_ro, perms: rx }
-      - { etype: group, entity: films_rw, perms: rwx }
-
-  - path: /storage/common/isos
-    owner: root
-    group: root
-    mode: 770
-    acls:
-      - { etype: group, entity: isos_ro, perms: rx }
-      - { etype: group, entity: isos_rw, perms: rwx }
-
-  - path: /storage/common/s3
-    owner: root
-    group: root
-    mode: 770
-    acls:
-      - { etype: group, entity: s3_ro, perms: rx }
-      - { etype: group, entity: s3_rw, perms: rwx }
-
-  - path: /storage/common/workspace
-    owner: root
-    group: root
-    mode: 770
-    acls:
-      - { etype: group, entity: workspace_ro, perms: rx }
-      - { etype: group, entity: workspace_rw, perms: rwx }
-
-  - path: /storage/safe
-    owner: root
-    group: root
-    mode: 770
-    acls:
-      - { etype: group, entity: safe_ro, perms: rx }
-      - { etype: group, entity: safe_rw, perms: rwx }
-
-posix_users:
+common_posix_users:
   - uid: 2001
     name: alice
     comment: Alice Anderson
@@ -94,78 +45,8 @@ posix_users:
         enabled: false
     locked: false
 
-  - uid: 5000
-    name: su-jellyfin
-    comment: Service User - Jellyfin
-    create_home: false
-    password: "Asdasd22"
-    shell: /bin/bash
-    locked: false
+common_posix_groups: []
 
-posix_groups:
-  - name: films_ro
-    gid: 10000
-    users: []
-  - name: films_rw
-    gid: 10001
-    users: []
-
-  - name: s3_ro
-    gid: 10002
-    users: []
-  - name: s3_rw
-    gid: 10003
-    users: []
-
-  - name: isos_ro
-    gid: 10004
-    users: []
-  - name: isos_rw
-    gid: 10005
-    users: []
-
-  - name: workspace_ro
-    gid: 10006
-    users: []
-  - name: workspace_rw
-    gid: 10007
-    users:
-      - alice
-
-  - name: media_ro
-    gid: 10008
-    users: []
-  - name: media_rw
-    gid: 10009
-    users: []
-
-  - name: backups_ro
-    gid: 10010
-    users: []
-  - name: backups_rw
-    gid: 10011
-    users: []
-
-  - name: storage_ro
-    gid: 10012
-    users:
-      - alice
-  - name: storage_rw
-    gid: 10013
-    users: []
-
-  - name: common_ro
-    gid: 10014
-    users:
-      - alice
-  - name: common_rw
-    gid: 10015
-    users: []
-
-  - name: safe_ro
-    gid: 10016
-    users:
-      - alice
-  - name: safe_rw
-    gid: 10017
-    users: []
+merged_posix_folders: "{{ common_posix_folders + (posix_folders | default([], true)) }}"
+merged_posix_users: "{{ common_posix_users + (posix_users | default([], true)) }}"
+merged_posix_groups: "{{ common_posix_groups + (posix_groups | default([], true)) }}"

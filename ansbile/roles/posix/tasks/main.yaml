@@ -4,13 +4,13 @@
     name: "{{ group.name }}"
     gid: "{{ group.gid }}"
     state: present
-  loop: "{{ posix_groups }}"
+  loop: "{{ merged_posix_groups }}"
   loop_control:
     loop_var: group
 
 - name: "Creating user {{ user.name }} ({{ user.comment }})"
   ansible.builtin.include_tasks: create_user.yaml
-  loop: "{{ posix_users }}"
+  loop: "{{ merged_posix_users }}"
   loop_control:
     loop_var: user
 
@@ -21,11 +21,11 @@
     group: "{{ item.group | default('root')  }}"
     mode: "{{ item.mode | default('0755') }}"
     state: "{{ item.directory | default('directory') }}"
-  loop: "{{ posix_folders }}"
+  loop: "{{ merged_posix_folders }}"
 
 - name: Remove all ACLs from paths
   ansible.builtin.command: "setfacl -b {{ item.path }}"
-  loop: "{{ posix_folders }}"
+  loop: "{{ merged_posix_folders }}"
 
 - name: Set ACLs
   ansible.posix.acl:
@@ -34,4 +34,4 @@
     entity: "{{ item.1.entity }}"
     permissions: "{{ item.1.perms }}"
     state: present
-  loop: "{{ posix_folders | subelements('acls') }}"
+  loop: "{{ merged_posix_folders | subelements('acls') }}"

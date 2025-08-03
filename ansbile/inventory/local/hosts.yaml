@@ -1,6 +1,9 @@
 ---
 all:
   children:
-    samba_servers:
+    # samba_servers:
+    #   hosts:
+    #     a:
+    samba_clients:
       hosts:
-        vm_samba_users:
+        b:

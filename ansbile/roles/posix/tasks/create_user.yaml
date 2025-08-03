@@ -2,7 +2,7 @@
 - name: "Get group names where {{ user.name }} is a member"
   ansible.builtin.set_fact:
     user_groups: >-
-      {{ posix_groups | selectattr('users', 'defined')
+      {{ merged_posix_groups | selectattr('users', 'defined')
                       | selectattr('users', 'contains', user.name)
                       | map(attribute='name')
                       | list }}

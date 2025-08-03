@@ -1,9 +1,9 @@
 ---
 all:
   children:
-    # samba_servers:
-    #   hosts:
-    #     a:
-    samba_clients:
+    samba_servers:
       hosts:
-        b:
+        a:
+    # samba_clients:
+    #   hosts:
+    #     b:

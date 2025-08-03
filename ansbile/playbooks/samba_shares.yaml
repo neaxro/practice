@@ -1,0 +1,7 @@
+---
+- name: "Set up samba shares"
+  hosts: samba_servers
+  become: true
+  gather_facts: false
+  roles:
+    - samba_shares

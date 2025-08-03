@@ -45,17 +45,23 @@ posix_users:
 posix_groups:
   - name: storage_ro
     gid: 11001
-    users: []
+    users:
+      - alice
+      - peter
   - name: storage_rw
     gid: 11002
-    users: []
+    users:
+      - jerry
 
   - name: common_ro
     gid: 11003
-    users: []
+    users:
+      - alice
   - name: common_rw
     gid: 11004
-    users: []
+    users:
+      - jerry
+      - peter
 
   - name: films_ro
     gid: 11005
@@ -73,7 +79,10 @@ posix_groups:
 
   - name: safe_ro
     gid: 11009
-    users: []
+    users:
+      - peter
   - name: safe_rw
     gid: 11010
-    users: []
+    users:
+      - alice
+      - jerry

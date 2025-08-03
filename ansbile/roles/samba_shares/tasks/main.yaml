@@ -1,0 +1,31 @@
+---
+- name: "Add users to Samba"
+  ansible.builtin.command:
+    cmd: /usr/bin/smbpasswd -a "{{ user.name }}"
+    stdin: |
+      {{ user.password }}
+      {{ user.password }}
+  when: user.samba_access is defined and user.samba_access
+  loop: "{{ merged_posix_users }}"
+  loop_control:
+    loop_var: user
+
+- name: Configure smb.conf shares
+  ansible.builtin.blockinfile:
+    path: /etc/samba/smb.conf
+    marker: "# {mark} ANSIBLE MANAGED BLOCK {{ share.name }}"
+    block: |
+      [{{ share.samba_name }}]
+      path = {{ share.path }}
+      browseable = {{ 'yes' if share.samba_browsable else 'no' }}
+      valid users = {{ share.samba_valid_users | join(', ') }}
+      read only = no
+  loop: "{{ samba_shares }}"
+  loop_control:
+    loop_var: share
+
+- name: Ensure Samba service is enabled and restarted
+  ansible.builtin.systemd:
+    name: smbd
+    enabled: true
+    state: restarted

@@ -19,7 +19,7 @@
     path: "{{ item.path }}"
     owner: "{{ item.owner | default('root')  }}"
     group: "{{ item.group | default('root')  }}"
-    mode: "{{ item.mode | default('0755') }}"
+    mode: "{{ item.mode }}"
     state: "{{ item.directory | default('directory') }}"
   loop: "{{ merged_posix_folders }}"
 
@@ -31,7 +31,8 @@
   ansible.posix.acl:
     path: "{{ item.0.path }}"
     etype: "{{ item.1.etype }}"
-    entity: "{{ item.1.entity }}"
+    entity: "{{ item.1.entity | default('') }}"
     permissions: "{{ item.1.perms }}"
+    default: "{{ item.1.default | default(false) }}"
     state: present
   loop: "{{ merged_posix_folders | subelements('acls') }}"

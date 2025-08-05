@@ -17,8 +17,8 @@ common_posix_folders:
 
 common_posix_users:
   - uid: 2001
-    name: alice
-    comment: Alice Anderson
+    name: axel
+    comment: Axel Roland Nemes
     create_home: true
     password: "Asdasd22"
     shell: /bin/bash
@@ -27,13 +27,30 @@ common_posix_users:
       # axel@ubuntu
       - key: ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQCkoawvCBBV/eRY17Zkv440xtWKbcjwT+yrZr3kVWa/Z6dtPd58S/WZ5FZ5sWVkzr78P7hZJiHxU4ISmNEANcJFOMz5X1LF+gSfk0Qkba431Qq0I6ODODNCcCo90no/P0ml0kyhcqNPkfH8WIlcYpQ3w0PV9q0bM3xDDP/HVXlYzSzz0xLOS/Vqjqa2AbUXQdIdtPszuSaw+DFbaTg2wVQIAegzF3tzlj/qEE8gsMd7dQ2S/FZXp1Nr1lGFI3ZeGhy66F75o7ysa46ua7sHZJYCpdDs9wX2coQRams95aSTwnIlSbjZE72oo2SMrNV4JKsPe23/db6Yi6LEb3p7zF9bDV/HPjhZeiGdEd66najWsLAuIgoYabTdmI/4q6NZMflnvcIQeD646Q5Bof4Y02ldixqZ8iodzHd+4FRWbztb/wQZvTiqPvcSDpwUmrBklmgnNao0s+tZShZfask+Y3R2M192cwkMKIImQysbBZvuKI/NgO5oiqqgS6cvZLdQchE= axel@ubuntu
         enabled: false
-      # peter@osboxes
-      - key: ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCs8+5dNkrbOX7Pg3OrJ7Vnxc4JtzAoeuNgGOM03jmHxWXZP2cHPmCI0gsDTaBU4jN+wn58g/Cgy/hFYK8MA9NIFgp9NRqetfJaRnK1eN15X+/1j1jst9Uc5imFpKmWsi1Sidg/nE0WjxhQrU+8XZ4EBXxxlK6CBIoKot5KJtUZFtjuq8i6tA9Eb4hDb3nRtmIrQmPLkh7wLuiT20dvOZ2LoW0pRzrsRrz7Q6//amg0jBZji7uva23ZFP/VvADKJUEgQO8naFSc7kkShuUKvY60inyR1trp6fORNqCeqNlEZDjJq9KC7wWXYln1ZJTyLo2brDkWNuWXk4T8fPYxEczj ansible-generated on osboxes
+      # axel@thinkpad
+      - key: ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQCum76H/eFrhuRewSNHdd74NmaMWpO2yzwJ/l5UNMxggqYPZSojWNGhczwaayX1Olb653C4lc+JRsjLIcR75PeBAJ4SKre/63ORCDwvAXsaCsNRQYgruEFDZ0+ATViAPyuJOPSKTGsXPdTNd7Q2cxZgyLvOEaES+Qy+caVNDbM++j9falI2/l0FbmbRdzXFlzDGYa4V1BIa+eL69ERc4sqgPt40C4RRhe+El/s/kaBymC0I5RC9yejRnRB+0k2OF5XFNqwd9JY8fzZlasnSvv8UZM7xvbxoFkH+wMqJZ1eE4OuZgxJ4hlBbOS20sbZ4xyNsnO7Mv0Ag2DRLZI+u7t6n+c0Vu/GrNgJfVOuScNiTVCqmQaLb7wGk1BDfGk7ztnlB7S3kZHh3bXxsk11d98/HTtJDAsutwAWQym6odxZ4CxtZwH6mfQyU+a8EOkpfHGag539Cicm/xLk5KmTkfRfPxQa1abKA41OPWqI8D1LLdEjIXpe8jDuvqIDnHERibKU= axel@thinkpad
         enabled: true
     locked: false
     samba_access: true
 
   - uid: 2002
+    name: bob
+    comment: Bob Anderson
+    create_home: true
+    password: "Asdasd22"
+    shell: /bin/bash
+    generate_ssh_key: true
+    authorized_keys:
+      # axel@ubuntu
+      - key: ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQCkoawvCBBV/eRY17Zkv440xtWKbcjwT+yrZr3kVWa/Z6dtPd58S/WZ5FZ5sWVkzr78P7hZJiHxU4ISmNEANcJFOMz5X1LF+gSfk0Qkba431Qq0I6ODODNCcCo90no/P0ml0kyhcqNPkfH8WIlcYpQ3w0PV9q0bM3xDDP/HVXlYzSzz0xLOS/Vqjqa2AbUXQdIdtPszuSaw+DFbaTg2wVQIAegzF3tzlj/qEE8gsMd7dQ2S/FZXp1Nr1lGFI3ZeGhy66F75o7ysa46ua7sHZJYCpdDs9wX2coQRams95aSTwnIlSbjZE72oo2SMrNV4JKsPe23/db6Yi6LEb3p7zF9bDV/HPjhZeiGdEd66najWsLAuIgoYabTdmI/4q6NZMflnvcIQeD646Q5Bof4Y02ldixqZ8iodzHd+4FRWbztb/wQZvTiqPvcSDpwUmrBklmgnNao0s+tZShZfask+Y3R2M192cwkMKIImQysbBZvuKI/NgO5oiqqgS6cvZLdQchE= axel@ubuntu
+        enabled: false
+      # axel@thinkpad
+      - key: ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQCum76H/eFrhuRewSNHdd74NmaMWpO2yzwJ/l5UNMxggqYPZSojWNGhczwaayX1Olb653C4lc+JRsjLIcR75PeBAJ4SKre/63ORCDwvAXsaCsNRQYgruEFDZ0+ATViAPyuJOPSKTGsXPdTNd7Q2cxZgyLvOEaES+Qy+caVNDbM++j9falI2/l0FbmbRdzXFlzDGYa4V1BIa+eL69ERc4sqgPt40C4RRhe+El/s/kaBymC0I5RC9yejRnRB+0k2OF5XFNqwd9JY8fzZlasnSvv8UZM7xvbxoFkH+wMqJZ1eE4OuZgxJ4hlBbOS20sbZ4xyNsnO7Mv0Ag2DRLZI+u7t6n+c0Vu/GrNgJfVOuScNiTVCqmQaLb7wGk1BDfGk7ztnlB7S3kZHh3bXxsk11d98/HTtJDAsutwAWQym6odxZ4CxtZwH6mfQyU+a8EOkpfHGag539Cicm/xLk5KmTkfRfPxQa1abKA41OPWqI8D1LLdEjIXpe8jDuvqIDnHERibKU= axel@thinkpad
+        enabled: true
+    locked: false
+    samba_access: true
+
+  - uid: 2003
     name: peter
     comment: Peter Griffin
     create_home: true
@@ -41,9 +58,14 @@ common_posix_users:
     shell: /bin/bash
     generate_ssh_key: true
     authorized_keys:
+      # axel@ubuntu
       - key: ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQCkoawvCBBV/eRY17Zkv440xtWKbcjwT+yrZr3kVWa/Z6dtPd58S/WZ5FZ5sWVkzr78P7hZJiHxU4ISmNEANcJFOMz5X1LF+gSfk0Qkba431Qq0I6ODODNCcCo90no/P0ml0kyhcqNPkfH8WIlcYpQ3w0PV9q0bM3xDDP/HVXlYzSzz0xLOS/Vqjqa2AbUXQdIdtPszuSaw+DFbaTg2wVQIAegzF3tzlj/qEE8gsMd7dQ2S/FZXp1Nr1lGFI3ZeGhy66F75o7ysa46ua7sHZJYCpdDs9wX2coQRams95aSTwnIlSbjZE72oo2SMrNV4JKsPe23/db6Yi6LEb3p7zF9bDV/HPjhZeiGdEd66najWsLAuIgoYabTdmI/4q6NZMflnvcIQeD646Q5Bof4Y02ldixqZ8iodzHd+4FRWbztb/wQZvTiqPvcSDpwUmrBklmgnNao0s+tZShZfask+Y3R2M192cwkMKIImQysbBZvuKI/NgO5oiqqgS6cvZLdQchE= axel@ubuntu
         enabled: false
+      # axel@thinkpad
+      - key: ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQCum76H/eFrhuRewSNHdd74NmaMWpO2yzwJ/l5UNMxggqYPZSojWNGhczwaayX1Olb653C4lc+JRsjLIcR75PeBAJ4SKre/63ORCDwvAXsaCsNRQYgruEFDZ0+ATViAPyuJOPSKTGsXPdTNd7Q2cxZgyLvOEaES+Qy+caVNDbM++j9falI2/l0FbmbRdzXFlzDGYa4V1BIa+eL69ERc4sqgPt40C4RRhe+El/s/kaBymC0I5RC9yejRnRB+0k2OF5XFNqwd9JY8fzZlasnSvv8UZM7xvbxoFkH+wMqJZ1eE4OuZgxJ4hlBbOS20sbZ4xyNsnO7Mv0Ag2DRLZI+u7t6n+c0Vu/GrNgJfVOuScNiTVCqmQaLb7wGk1BDfGk7ztnlB7S3kZHh3bXxsk11d98/HTtJDAsutwAWQym6odxZ4CxtZwH6mfQyU+a8EOkpfHGag539Cicm/xLk5KmTkfRfPxQa1abKA41OPWqI8D1LLdEjIXpe8jDuvqIDnHERibKU= axel@thinkpad
+        enabled: true
     locked: false
+    samba_access: true
 
 common_posix_groups: []
 

@@ -3,7 +3,7 @@ all:
   children:
     samba_servers:
       hosts:
-        a:
+        c:
     # samba_clients:
     #   hosts:
     #     b:

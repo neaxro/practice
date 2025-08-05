@@ -1,0 +1,151 @@
+ansible_user: ansible
+ansible_host: 192.168.1.14
+ansible_port: 22
+
+posix_folders:
+  - path: /storage
+    owner: root
+    group: root
+    mode: 750
+    acls:
+      - { etype: group, entity: storage_ro, perms: rx }
+      - { etype: group, entity: storage_rw, perms: rwx }
+
+  - path: /storage/standalone
+    owner: root
+    group: standalone_ro
+    mode: 750
+    acls:
+      - { etype: group, entity: standalone_ro, perms: rx }
+      - { etype: group, entity: standalone_rw, perms: rwx }
+
+  - path: /storage/standalone/films
+    owner: root
+    group: films_ro
+    mode: "02750"
+    acls:
+      - { etype: group, entity: films_ro, perms: rx }
+      - { etype: group, entity: films_ro, perms: rx, default: true }
+      - { etype: group, entity: films_rw, perms: rwx }
+      - { etype: group, entity: films_rw, perms: rwx, default: true }
+
+  - path: /storage/standalone/series
+    owner: root
+    group: series_ro
+    mode: "02750"
+    acls:
+      - { etype: group, entity: series_ro, perms: rx }
+      - { etype: group, entity: series_ro, perms: rx, default: true }
+      - { etype: group, entity: series_rw, perms: rwx }
+      - { etype: group, entity: series_rw, perms: rwx, default: true }
+
+  - path: /storage/raid1
+    owner: root
+    group: raid_ro
+    mode: 750
+    acls:
+      - { etype: group, entity: raid_ro, perms: rx }
+      - { etype: group, entity: raid_rw, perms: rwx }
+
+  - path: /storage/raid1/media
+    owner: root
+    group: media_ro
+    mode: "02750"
+    acls:
+      - { etype: group, entity: media_ro, perms: rx }
+      - { etype: group, entity: media_ro, perms: rx, default: true }
+      - { etype: group, entity: media_rw, perms: rwx }
+      - { etype: group, entity: media_rw, perms: rwx, default: true }
+
+  - path: /storage/raid1/workspace
+    owner: root
+    group: workspace_ro
+    mode: 750
+    acls:
+      - { etype: group, entity: workspace_ro, perms: rx }
+      - { etype: group, entity: workspace_rw, perms: rwx }
+      - { etype: other, perms: ---, default: true }
+
+  - path: /storage/raid1/backup
+    owner: root
+    group: backup_ro
+    mode: "02750"
+    acls:
+      - { etype: group, entity: backup_ro, perms: rx }
+      - { etype: group, entity: backup_ro, perms: rx, default: true }
+      - { etype: group, entity: backup_rw, perms: rwx }
+      - { etype: group, entity: backup_rw, perms: rwx, default: true }
+
+posix_users: []
+
+posix_groups:
+  - name: storage_ro
+    gid: 11001
+    users:
+      - axel
+      - bob
+  - name: storage_rw
+    gid: 11002
+    users: []
+
+  - name: standalone_ro
+    gid: 11003
+    users:
+      - axel
+      - bob
+  - name: standalone_rw
+    gid: 11004
+    users: []
+
+  - name: films_ro
+    gid: 11005
+    users:
+      - axel
+      - bob
+  - name: films_rw
+    gid: 11006
+    users: []
+
+  - name: series_ro
+    gid: 11007
+    users:
+      - axel
+  - name: series_rw
+    gid: 11008
+    users: []
+
+  - name: raid_ro
+    gid: 11009
+    users:
+      - axel
+      - bob
+  - name: raid_rw
+    gid: 11010
+    users: []
+
+  - name: media_ro
+    gid: 11011
+    users:
+      - bob
+  - name: media_rw
+    gid: 11012
+    users:
+      - axel
+
+  - name: workspace_ro
+    gid: 11013
+    users: []
+  - name: workspace_rw
+    gid: 11014
+    users:
+      - axel
+      - bob
+
+  - name: backup_ro
+    gid: 11015
+    users:
+      - bob
+  - name: backup_rw
+    gid: 11016
+    users:
+      - axel

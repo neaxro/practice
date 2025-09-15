@@ -1,2 +1,4 @@
 resources:
-- ../../infra/metallb
+  - ../../infra/metallb
+  - ../../infra/ingress-nginx
+  - ../../infra/pihole

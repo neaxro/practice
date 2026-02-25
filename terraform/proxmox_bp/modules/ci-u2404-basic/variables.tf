@@ -12,3 +12,7 @@ variable "cpu_cores" {
 variable "root_disk_size" {
   default = "32G"
 }
+
+variable "instance_count" {
+  default = 1
+}

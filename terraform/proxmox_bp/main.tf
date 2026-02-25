@@ -1,11 +1,14 @@
 
-variable "num_vms" {
-  default = 3
-}
+# module "ci-u2024-basic" {
+#   source         = "./modules/ci-u2404-basic"
+#   name           = "ci-u2024-basic-instance"
+#   memory         = 2048
+#   instance_count = 1
+# }
 
-module "ci-test" {
-  count  = var.num_vms
-  source = "./modules/ci-test"
-  name   = "module-test-${count.index + 1}"
-  memory = 1024
+module "ci-u2024" {
+  source         = "./modules/ci-u2404"
+  name           = "ci-u2024-instance"
+  memory         = 2048
+  instance_count = 1
 }
